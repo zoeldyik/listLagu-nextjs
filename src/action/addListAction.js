@@ -13,6 +13,7 @@ try {
 } catch (error) {
   console.log(error)
   // return {msg:error}
+  throw new Error(error)
 }
   
 }
