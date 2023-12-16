@@ -1,10 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-const pathFile = `${process.cwd()}/src/data/data.json`;
+const pathFile = `${process.cwd()}/public/data.json`;
 console.log(pathFile);
 
 export default async function Home() {
-  const file = await fs.readFile(pathFile, { encoding: "utf8" });
+  const file = await fs.readFile(pathFile);
   const datas = JSON.parse(file);
   console.log(datas);
 
