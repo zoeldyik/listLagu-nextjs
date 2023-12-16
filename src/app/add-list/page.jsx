@@ -17,7 +17,7 @@ export default function page() {
       fileNames.push({ fileName: file.name.split(".")[0] });
     }
     const msg = await addListAction(fileNames);
-    // console.log(msg);
+    console.log(msg);
     msg === "success" ? router.replace("/") : window.alert(msg);
   };
 
