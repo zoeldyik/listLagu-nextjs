@@ -9,9 +9,10 @@ export default async function addListAction(daftarNama){
 try {
   await fs.writeFile(pathFile,JSON.stringify(daftarNama))
   revalidatePath('/')
-  return {msg:'success'}
+  // return {msg:'success'}
 } catch (error) {
-  return {msg:error}
+  console.log(error)
+  // return {msg:error}
 }
   
 }

@@ -16,9 +16,9 @@ export default function page() {
     for (const file of files) {
       fileNames.push({ fileName: file.name.split(".")[0] });
     }
-    const { msg } = await addListAction(fileNames);
-    console.log(msg);
-    msg === "success" ? router.replace("/") : Error();
+    await addListAction(fileNames);
+    // console.log(msg);
+    // msg === "success" ? router.replace("/") : Error();
   };
 
   return (
