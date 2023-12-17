@@ -2,9 +2,12 @@
 
 import addListAction from "@/action/addListAction";
 import { useRouter } from "next/navigation";
+import jsCookie from "js-cookie";
 
 export default function page() {
   const router = useRouter();
+
+  if (!jsCookie.get("admin")) return router.push("/login");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

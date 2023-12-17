@@ -1,4 +1,6 @@
 import Link from "next/link";
+import LogoutBtn from "./LogoutBtn";
+import { cookies } from "next/headers";
 
 export default function Navbar() {
   return (
@@ -9,12 +11,20 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex-none">
-        <Link href="/add-list" className="mr-3 btn btn-ghost btn-sm">
-          add list
-        </Link>
-        <Link href="/login" className="mr-4 btn btn-info btn-sm">
-          login
-        </Link>
+        {!cookies().get("admin") && (
+          <Link href="/login" className="mr-4 btn btn-info btn-sm">
+            login
+          </Link>
+        )}
+
+        {cookies().get("admin") && (
+          <>
+            <Link href="/add-list" className="mr-3 btn btn-ghost btn-sm">
+              add list
+            </Link>
+            <LogoutBtn />
+          </>
+        )}
       </div>
     </div>
   );
