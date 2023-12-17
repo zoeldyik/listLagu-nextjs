@@ -1,19 +1,22 @@
 'use server'
-import path from 'node:path'
-import fs from 'node:fs/promises'
-import { revalidatePath, revalidateTag } from 'next/cache';
-const pathFile = `${process.cwd()}/public/data.json`;
+import {prisma} from "../db"
+
+import { revalidatePath } from 'next/cache';
 
 export default async function addListAction(daftarNama){
   console.log('daftar nama',daftarNama)
-try {
-  await fs.writeFile(pathFile,JSON.stringify(daftarNama))
-  revalidatePath('/')
-  return 'success'
-} catch (error) {
-  console.log(error)
-  // return {msg:error}
-  throw new Error('error dari action')
-}
+
+  try {
+    await prisma.Datas.deleteMany()
+    await prisma.Datas.createMany({
+      data: daftarNama
+    })
+    // console.log(createMany)
+    revalidatePath('/')
+    return 'success'
+  } catch (error) {
+    console.log(error)
+    return error
+  }
   
 }

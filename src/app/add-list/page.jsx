@@ -1,7 +1,6 @@
 "use client";
 
 import addListAction from "@/action/addListAction";
-import Error from "next/error";
 import { useRouter } from "next/navigation";
 
 export default function page() {
@@ -14,11 +13,11 @@ export default function page() {
     const fileNames = [];
 
     for (const file of files) {
-      fileNames.push({ fileName: file.name.split(".")[0] });
+      fileNames.push({ filename: file.name.split(".")[0] });
     }
     const msg = await addListAction(fileNames);
     console.log(msg);
-    msg === "success" ? router.replace("/") : window.alert(msg);
+    msg === "success" ? router.replace("/") : window.alert(msg.message);
   };
 
   return (
