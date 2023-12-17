@@ -16,7 +16,7 @@ export default async function addListAction(daftarNama){
     return 'success'
   } catch (error) {
     console.log(error)
-    return error
+    return 'error saat query db'
   }
   
 }

@@ -17,7 +17,7 @@ export default function page() {
     }
     const msg = await addListAction(fileNames);
     console.log(msg);
-    msg === "success" ? router.replace("/") : window.alert(msg.message);
+    msg === "success" ? router.replace("/") : window.alert(msg);
   };
 
   return (
