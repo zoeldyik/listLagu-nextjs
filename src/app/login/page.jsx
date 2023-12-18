@@ -26,7 +26,7 @@ function page({ searchParams }) {
               placeholder="password"
               className="input input-ghost input-md w-full max-w-xs mb-2"
             />
-            <button className="btn btn-info w-full mt-3">LOGIN</button>
+            <button className="btn btn-neutral w-full mt-3">LOGIN</button>
           </form>
         </div>
       </div>

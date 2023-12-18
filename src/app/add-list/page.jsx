@@ -1,7 +1,7 @@
 "use client";
 
-import addListAction from "@/action/addListAction";
 import { useRouter } from "next/navigation";
+import addListAction from "@/action/addListAction";
 import jsCookie from "js-cookie";
 
 export default function page() {
@@ -9,18 +9,18 @@ export default function page() {
 
   if (!jsCookie.get("admin")) return router.push("/login");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const files = document.querySelector("input").files;
 
     const fileNames = [];
 
     for (const file of files) {
-      fileNames.push({ filename: file.name.split(".")[0] });
+      fileNames.push({ filename: file.name.split(".").slice(0, -1).join(" ") });
     }
-    const msg = await addListAction(fileNames);
-    console.log(msg);
-    msg === "success" ? router.replace("/") : window.alert(msg);
+    addListAction(fileNames).then((msg) => {
+      msg === "success" ? router.replace("/") : window.alert(msg);
+    });
   };
 
   return (
@@ -33,9 +33,9 @@ export default function page() {
               type="file"
               multiple
               required
-              className="file-input file-input-bordered file-input-info w-full max-w-xs"
+              className="file-input file-input-bordered file-input-neutral w-full max-w-xs"
             />
-            <button className="btn btn-info w-full mt-3">Input Data</button>
+            <button className="btn btn-neutral w-full mt-3">Input Data</button>
           </form>
         </div>
       </div>

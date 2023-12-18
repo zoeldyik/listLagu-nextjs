@@ -12,7 +12,7 @@ export default function Navbar() {
       </div>
       <div className="flex-none">
         {!cookies().get("admin") && (
-          <Link href="/login" className="mr-4 btn btn-info btn-sm">
+          <Link href="/login" className="mr-4 btn btn-outline btn-sm">
             login
           </Link>
         )}

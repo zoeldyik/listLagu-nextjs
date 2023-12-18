@@ -15,7 +15,6 @@ export default async function addListAction(daftarNama){
     await prisma.Datas.createMany({
       data: daftarNama
     })
-    // console.log(createMany)
     revalidatePath('/')
     return 'success'
   } catch (error) {
