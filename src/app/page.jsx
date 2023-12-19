@@ -1,9 +1,10 @@
 import SearchBar from "@/components/SearchBar";
+import { redirect } from "next/navigation";
 import { prisma } from "../db";
 
 export default async function Home({ searchParams }) {
   const key = searchParams.search;
-  console.log(key);
+  // console.log("searchParams= ", key);
   let datas;
   if (!key) {
     datas = await prisma.Datas.findMany();
@@ -17,9 +18,18 @@ export default async function Home({ searchParams }) {
       },
     });
   }
+  // console.log(datas);
+
+  async function searchAction(formData) {
+    "use server";
+    console.log(formData.get("input"));
+    const searchQuery = "/?search=" + formData.get("input");
+    redirect(searchQuery);
+  }
   return (
     <main className="mx-4 mt-4 min-h-screen md:w-[640px] md:mx-auto">
-      <SearchBar />
+      <SearchBar searchAction={searchAction} />
+
       {Boolean(datas.length) ? (
         datas.map(({ filename }, idx) => (
           <div

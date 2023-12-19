@@ -1,6 +1,12 @@
 import { loginAction } from "../../action/userAction";
+import { cookies } from "next/headers";
+import { redirect } from "next/dist/server/api-utils";
 
 function page({ searchParams }) {
+  if (cookies.get("admin")) {
+    return redirect("/");
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="card w-96">

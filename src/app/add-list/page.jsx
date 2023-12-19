@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import addListAction from "@/action/addListAction";
 import jsCookie from "js-cookie";
-
 export default function page() {
   const router = useRouter();
 
