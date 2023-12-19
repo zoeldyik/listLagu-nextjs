@@ -22,8 +22,8 @@ export default async function Home({ searchParams }) {
 
   async function searchAction(formData) {
     "use server";
-    console.log(formData.get("input"));
-    const searchQuery = "/?search=" + formData.get("input");
+    const input = formData.get("input");
+    const searchQuery = input ? "/?search=" + formData.get("input") : "/";
     redirect(searchQuery);
   }
   return (
