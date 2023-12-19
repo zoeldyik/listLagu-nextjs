@@ -4,12 +4,23 @@ import { prisma } from "../db";
 
 export default async function Home({ searchParams }) {
   const key = searchParams.search;
-  // console.log("searchParams= ", key);
+  console.log("searchParams= ", key);
   let datas;
   if (!key) {
-    datas = await prisma.Datas.findMany();
+    datas = await prisma.Datas.findMany({
+      orderBy: [
+        {
+          nomor: "asc",
+        },
+      ],
+    });
   } else {
     datas = await prisma.Datas.findMany({
+      orderBy: [
+        {
+          nomor: "asc",
+        },
+      ],
       where: {
         filename: {
           contains: key,
@@ -31,19 +42,21 @@ export default async function Home({ searchParams }) {
       <SearchBar searchAction={searchAction} />
 
       {Boolean(datas.length) ? (
-        datas.map(({ filename }, idx) => (
+        datas.map(({ filename, nomor }) => (
           <div
             className="min-h-[68px] flex border-b-2 border-base-300 py-3 gap-2"
-            key={idx}
+            key={nomor}
           >
             <div className="px-3 text-base-200 bg-neutral rounded-md flex justify-center items-center">
-              <p>{idx + 1}</p>
+              <p>{nomor}</p>
             </div>
             <p className="text-[14px] md:text-[17px]">{filename}</p>
           </div>
         ))
       ) : (
-        <p>Lagu tidak ditemukan</p>
+        <div>
+          <p className="text-center">Lagu tidak ditemukan!</p>
+        </div>
       )}
     </main>
   );

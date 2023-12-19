@@ -13,10 +13,15 @@ export default function page() {
     const files = document.querySelector("input").files;
 
     const fileNames = [];
-
+    let counter = 1;
     for (const file of files) {
-      fileNames.push({ filename: file.name.split(".").slice(0, -1).join(" ") });
+      fileNames.push({
+        filename: file.name.split(".").slice(0, -1).join(" "),
+        nomor: counter,
+      });
+      counter++;
     }
+    console.log(fileNames);
     addListAction(fileNames).then((msg) => {
       msg === "success" ? router.replace("/") : window.alert(msg);
     });

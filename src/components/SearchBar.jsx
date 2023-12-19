@@ -1,4 +1,4 @@
-export default function SearchBar({ searchAction }) {
+export default function SearchBar({ searchAction, value }) {
   return (
     <form action={searchAction} className="mb-5 flex md:justify-end md:mb-8">
       <input
